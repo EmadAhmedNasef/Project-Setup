@@ -26,7 +26,7 @@ export class LoginComponent {
   public loginForm!: FormGroup;
   emailField = 'false';
   passwordField = 'true';
-  //errorMsg : string = '';
+  errorMsg : string = '';
 
   constructor(private formBuilder: FormBuilder , private _AuthService : AuthService ,private _Router : Router, private _ToastrService : ToastrService) {}
   ngOnInit(): void {
@@ -60,10 +60,8 @@ export class LoginComponent {
           }
         },
         error: (error) => {
-          // console.log(error.error.error.details);
-          // this.errorMsg = error.error.error.details;
-          console.log(error);
-          
+          console.log(error.error.error.details);
+          this.errorMsg = error.error.error.details;          
         },
       });
     }
