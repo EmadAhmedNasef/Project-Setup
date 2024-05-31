@@ -9,8 +9,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   selector: 'app-expense-card',
   standalone: true,
   imports: [MatButtonModule,MatCardModule,MatProgressBarModule,CommonModule,MatIcon],
-  templateUrl: './Expense-card.component.html',
-  styleUrl: './Expense-card.component.css'
+  templateUrl: './expense-card.component.html',
+  styleUrl: './expense-card.component.css'
 })
 export class ExpenseCardComponent {
   @Input() budget: any;  // Declare the input property
