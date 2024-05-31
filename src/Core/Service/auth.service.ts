@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private apiUrl = environment.apiUrl;
   userInfo : any;
+  userID : any;
 
   constructor(private _HttpClient : HttpClient) { }
 
@@ -26,10 +27,13 @@ export class AuthService {
     if(encode != null){
       const decode = jwtDecode(encode);
       this.userInfo = decode;
+      this.userID = decode.sub;
       //console.log(decode);
     } 
   }
-
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
 
 }
