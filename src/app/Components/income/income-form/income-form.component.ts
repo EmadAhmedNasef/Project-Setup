@@ -19,7 +19,7 @@ export class IncomeFormComponent implements OnInit {
   constructor(private _IncomeCategoryService: IncomeCategoryService) {}
 
   incomeForm: FormGroup = new FormGroup({
-    category: new FormControl(''),
+    category: new FormControl({ value: '', disabled: true }),
     amount: new FormControl(''),
     type: new FormControl(''),
     duration: new FormControl(''),

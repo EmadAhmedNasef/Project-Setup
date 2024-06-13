@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import {  Router, RouterLink } from '@angular/router';
 import { IncomeFormComponent } from '../income/income-form/income-form.component';
 import { AuthService } from '../../../Core/Service/auth.service';
+import { SideBarComponent } from '../side-bar/side-bar.component';
 //import * as bootstrap from "bootstrap";
 
 
 @Component({
   selector: 'app-nav-main',
   standalone: true,
-  imports: [CommonModule , RouterLink ,IncomeFormComponent],
+  imports: [CommonModule , RouterLink ,IncomeFormComponent,SideBarComponent],
   templateUrl: './nav-main.component.html',
   styleUrl: './nav-main.component.css'
 })
