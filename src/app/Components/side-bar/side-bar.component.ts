@@ -6,7 +6,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { StyleClassModule } from 'primeng/styleclass';
 import { Sidebar } from 'primeng/sidebar';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../Core/Service/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -16,8 +15,6 @@ import { AuthService } from '../../../Core/Service/auth.service';
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent {
-  constructor(private _AuthService : AuthService) {}
-  userEmail : string = "";
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
 
   closeCallback(e:any): void {
@@ -25,10 +22,4 @@ export class SideBarComponent {
   }
 
   sidebarVisible: boolean = false;
-
-  ngOnInit(): void {
-    this._AuthService.decodeUser();
-    this.userEmail = this._AuthService.userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
-  }
-
 }

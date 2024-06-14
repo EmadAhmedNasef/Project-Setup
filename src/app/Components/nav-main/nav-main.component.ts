@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {  Router, RouterLink } from '@angular/router';
 import { IncomeFormComponent } from '../income/income-form/income-form.component';
-import { AuthService } from '../../../Core/Service/auth.service';
 import { SideBarComponent } from '../side-bar/side-bar.component';
+import { AuthService } from '../../../Core/Service/auth.service';
 //import * as bootstrap from "bootstrap";
 
 
@@ -15,19 +15,28 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
   styleUrl: './nav-main.component.css'
 })
 export class NavMainComponent {
+  UserName:string = 'anonymous'
+  constructor(private _Router : Router , private _AuthService : AuthService) {
+  }
 
-  constructor(private _Router : Router , private _AuthService : AuthService) {}
-  userEmail : string = "";
-
+  ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.UserName = this._AuthService.decodeUser();
+      console.log(this.UserName);
+    }
+  }
   handleLogout() {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
       this._Router.navigate(['/login']);
+
     }
   }
 
-  ngOnInit(): void {
-    this._AuthService.decodeUser();
-    this.userEmail = this._AuthService.userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
-  }
+  
+  // openIncomeModal() {
+  //   const modal = new bootstrap.Modal(document.getElementById('incomeModal1')!);
+  //   modal.show();
+
+  // }
 }

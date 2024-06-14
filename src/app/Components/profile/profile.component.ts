@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProfileDataService } from '../../../Core/Service/profile-data.service';
 import { AuthService } from '../../../Core/Service/auth.service';
+import { ProfileDataService } from '../../../Core/Service/profile-data.service';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
   profileForm!: FormGroup;
@@ -110,6 +105,4 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
-
-  
 }
