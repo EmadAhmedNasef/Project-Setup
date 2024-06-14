@@ -18,12 +18,11 @@ export class NavMainComponent {
   UserName:string = 'anonymous'
   constructor(private _Router : Router , private _AuthService : AuthService) {
   }
+  userEmail : string = "";
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.UserName = this._AuthService.decodeUser();
-      console.log(this.UserName);
-    }
+    this._AuthService.decodeUser();
+    this.userEmail = this._AuthService.userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
   }
   handleLogout() {
     if (localStorage.getItem('token')) {
