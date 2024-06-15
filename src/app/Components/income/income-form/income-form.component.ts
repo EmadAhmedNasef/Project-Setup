@@ -60,8 +60,6 @@ export class IncomeFormComponent implements OnInit {
       categoryId: categoryId,
       category: this._IncomeCategoryService.getCategoryNameById(categoryId),
     };
-
-    // Set date to today's date if type is 'fixed'
     if (type === 0) {
       formData.date = this.getCurrentDate();
     } else {
@@ -78,6 +76,8 @@ export class IncomeFormComponent implements OnInit {
           ...formData,
           date: this.formatDateToShow(formData.date),
         });
+        this._TransactionService.updateTransactions();
+        this.incomeForm.reset();
       },
       (error) => {
         console.error('Error submitting transaction:', error);
@@ -99,8 +99,8 @@ export class IncomeFormComponent implements OnInit {
   getCurrentDate(): string {
     const today = new Date();
     const year = today.getFullYear();
-    const month = ('0' + (today.getMonth() + 1)).slice(-2); // Add leading zero
-    const day = ('0' + today.getDate()).slice(-2); // Add leading zero
+    const month = ('0' + (today.getMonth() + 1)).slice(-2); 
+    const day = ('0' + today.getDate()).slice(-2); 
     return `${year}-${month}-${day}`;
   }
 
@@ -108,8 +108,8 @@ export class IncomeFormComponent implements OnInit {
     if (date) {
       const dateObj = new Date(date);
       const year = dateObj.getFullYear();
-      const month = ('0' + (dateObj.getMonth() + 1)).slice(-2); // Add leading zero
-      const day = ('0' + dateObj.getDate()).slice(-2); // Add leading zero
+      const month = ('0' + (dateObj.getMonth() + 1)).slice(-2); 
+      const day = ('0' + dateObj.getDate()).slice(-2); 
       return `${year}-${month}-${day}`;
     }
     return '';
