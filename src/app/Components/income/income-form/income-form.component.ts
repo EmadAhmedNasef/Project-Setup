@@ -5,6 +5,7 @@ import { IncomeCategoryService } from '../../../../Core/Service/income-category.
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { TransactionService } from '../../../../Core/Service/transaction.service';
+import { AuthService } from '../../../../Core/Service/auth.service';
 
 @Component({
   selector: 'app-income-form',
@@ -15,7 +16,7 @@ import { TransactionService } from '../../../../Core/Service/transaction.service
 })
 export class IncomeFormComponent implements OnInit {
   showContent: boolean = false;
-
+  userId: number = 0;
   incomeForm: FormGroup = new FormGroup({
     category: new FormControl({ value: '', disabled: true }),
     amount: new FormControl(''),
@@ -27,10 +28,12 @@ export class IncomeFormComponent implements OnInit {
 
   constructor(
     private _IncomeCategoryService: IncomeCategoryService,
-    private _TransactionService: TransactionService
+    private _TransactionService: TransactionService,
+    private _AuthService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.userId = this._AuthService.userID;
     this._IncomeCategoryService.categoryId.subscribe((id) => {
       if (id !== -1) {
         const categoryName = this._IncomeCategoryService.getCategoryNameById(id);
@@ -76,7 +79,7 @@ export class IncomeFormComponent implements OnInit {
           ...formData,
           date: this.formatDateToShow(formData.date),
         });
-        this._TransactionService.updateTransactions();
+        this._TransactionService.updateTransactions(this.userId);
         this.incomeForm.reset();
       },
       (error) => {

@@ -15,9 +15,9 @@ import { AuthService } from '../../../Core/Service/auth.service';
   styleUrl: './nav-main.component.css'
 })
 export class NavMainComponent {
-  UserName:string = 'anonymous'
   constructor(private _Router : Router , private _AuthService : AuthService) {
   }
+
   userEmail : string = "";
 
   ngOnInit(): void {
